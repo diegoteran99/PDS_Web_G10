@@ -1,31 +1,13 @@
-/* html,body,#container{
-    width: 100%;
+html, 
+body,
+.grid {
     height: 100%;
+    width: 100%;
     margin: 0;
-  } */
-  
-  button{
-    position: absolute;
-    top: 10px;
-    width: 120px;
-    box-sizing: border-box;
-    line-height:30px;
-    z-index: 1;
-    background-color: aqua;
-  }
-  #cropPhotoEnd{
-    left:10px;
-  }
-  #cropPhotoStart{
-    left:140px;
-  }
-  #cropPhotoReset{
-    left:270px;
-  }
-
-  body {
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background-color: #F0F0F0;
-  }
+}
+.grid {
+    background-image:
+      repeating-linear-gradient(#ccc 0 1px, transparent 1px 100%),
+      repeating-linear-gradient(90deg, #ccc 0 1px, transparent 1px 100%);
+    background-size: 30px 30px;
+}
