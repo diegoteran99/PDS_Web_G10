@@ -74,6 +74,17 @@ var shadowRectangle = new Konva.Rect({
   dash: [20, 2]
 });
 
+// var shadowLine = new Konva.Line({
+//     points: [5, 70, 140, 23, 250, 60, 300, 20],
+//     fill: '#FF7B17',
+//     opacity: 0.6,
+//     stroke: '#CF6412',
+//     strokeWidth: e,
+//     lineCap: 'round',
+//     lineJoin: 'round',
+//     dash: [20, 2]
+//   });
+
 function newRectangle(x, y, layer, stage) {
   let rectangle = new Konva.Rect({
     x: x,
@@ -146,3 +157,73 @@ newRectangle(blockSnapSize * 10, blockSnapSize * 3, layer, stage);
 
 stage.add(gridLayer);
 stage.add(layer);
+
+function addBeam(layer) {
+    var scale = 1;
+
+    var beam = new Konva.Line({
+        points: [20, 70, 20, 140],
+        stroke: 'red',
+        strokeWidth: 15,
+        lineCap: 'round',
+        lineJoin: 'round',
+
+      });
+
+    layer.add(beam);
+}
+
+function addSupport(layer) {
+    var scale = 1;
+
+    var beam = new Konva.Line({
+        points: [20, 70, 20, 140],
+        stroke: 'red',
+        strokeWidth: 15,
+        lineCap: 'round',
+        lineJoin: 'round',
+
+      });
+
+    layer.add(beam);
+}
+
+function addPointCharge(layer) {
+    var scale = 1;
+
+    var arrow = new Konva.Arrow({
+        x: stage.width() / 4,
+        y: stage.height() / 4,
+        points: [0, 0, width / 2, height / 2],
+        pointerLength: 20,
+        pointerWidth: 20,
+        fill: 'black',
+        stroke: 'black',
+        strokeWidth: 4,
+      });
+
+    layer.add(arrow);
+}
+
+
+
+document
+            .getElementById('btnCreateRectangle')
+            .addEventListener('click', function () {
+                addBeam(layer)
+                stage.add(layer);
+            });
+
+document
+            .getElementById('btnCreateSupport')
+            .addEventListener('click', function () {
+                addSupport(layer)
+                stage.add(layer);
+            });
+
+document
+            .getElementById('btnCreateArrow')
+            .addEventListener('click', function () {
+                addPointCharge(layer)
+                stage.add(layer);
+            });
