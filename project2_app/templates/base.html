@@ -1,3 +1,20 @@
-<script src="https://unpkg.com/konva@8/konva.min.js"></script>
-<h1>hola</h1>
-<p>prueba</p>
+<html><head>
+  <!-- USE DEVELOPMENT VERSION -->
+  <script src="https://cdn.rawgit.com/konvajs/konva/2.0.3/konva.min.js"></script>
+  <meta charset="utf-8">
+  {% load static %}
+  <title>Proyecto de Desarrollo de Sotfware - Proyecto 2</title>
+</head>
+
+<body>
+  <div id="container">
+    <div class="konvajs-content" role="presentation" style="position: relative; width: 1280px; height: 1313px;">
+      <canvas width="2560" height="2626" style="padding: 0px; margin: 0px; border: 0px; background-color: transparent; position: absolute; top: 0px; left: 0px; width: 1280px; height: 1313px; background-position: initial initial; background-repeat: initial initial;">
+      </canvas>
+    </div>
+  </div>
+  <script src="{% static '/js/base.js' %}"></script>
+
+  {% block js_script %}
+  {% endblock %}
+</body></html>
