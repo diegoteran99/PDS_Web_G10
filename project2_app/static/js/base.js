@@ -145,7 +145,7 @@ for (var j = 0; j < height / padding; j++) {
   gridLayer.add(new Konva.Line({
     points: [0, Math.round(j * padding), width, Math.round(j * padding)],
     stroke: '#ddd',
-    strokeWidth: 0.5,
+    strokeWidth: 1,
   }));
 }
 
@@ -162,9 +162,9 @@ function addBeam(layer) {
     var scale = 1;
 
     var beam = new Konva.Line({
-        points: [20, 70, 20, 140],
+        points: [30, 70, 30, 140],
         stroke: 'red',
-        strokeWidth: 15,
+        strokeWidth: 2,
         lineCap: 'round',
         lineJoin: 'round',
 
@@ -176,27 +176,28 @@ function addBeam(layer) {
 function addSupport(layer) {
     var scale = 1;
 
-    var beam = new Konva.Line({
-        points: [20, 70, 20, 140],
-        stroke: 'red',
-        strokeWidth: 15,
-        lineCap: 'round',
-        lineJoin: 'round',
-
+    var triangle = new Konva.RegularPolygon({
+        x: 150,
+        y: 275,
+        sides: 3,
+        radius: 10,
+        scaleY: 1.6,
+        stroke: "black",
+        fill: "rgba(200,0,200, 1)",
       });
 
-    layer.add(beam);
+    layer.add(triangle);
 }
 
 function addPointCharge(layer) {
     var scale = 1;
 
     var arrow = new Konva.Arrow({
-        x: stage.width() / 4,
-        y: stage.height() / 4,
-        points: [0, 0, width / 2, height / 2],
-        pointerLength: 20,
-        pointerWidth: 20,
+        x: stage.width() / 40,
+        y: stage.height() / 40,
+        points: [0, 0, width / 20, height / 20],
+        pointerLength: 5,
+        pointerWidth: 5,
         fill: 'black',
         stroke: 'black',
         strokeWidth: 4,
