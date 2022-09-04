@@ -6,6 +6,11 @@ var blockSnapSize = 30;
 var lineSize = 3;
 var triangleRadius = 10;
 
+let arrows = []
+let triangles = []
+let lines = []
+let nodes = []
+
 var stage = new Konva.Stage({
   container: 'container',
   width: width,
@@ -49,6 +54,7 @@ function newLine(layer) {
         });
 
     layer.add(line);
+    return line
 }
 
 function newSupport(layer, stage) {
@@ -72,8 +78,8 @@ function newSupport(layer, stage) {
     //     });
     //     stage.batchDraw();
     //   });
-
     layer.add(triangle);
+    return triangle
 }
 
 function addPointCharge(layer) {
@@ -90,31 +96,34 @@ function addPointCharge(layer) {
       });
 
     layer.add(arrow);
+    return arrow
 }
 
-// var tr = new Konva.Transformer();
-// layer.add(tr);
+var tr = new Konva.Transformer();
+layer.add(tr);
 
-// tr.nodes([ ]);
+
+
 
 
 document
             .getElementById('btnCreateLine')
             .addEventListener('click', function () {
-                newLine(layer)
+                lines.push(newLine(layer))
                 stage.add(layer);
             });
 
 document
             .getElementById('btnCreateSupport')
             .addEventListener('click', function () {
-                newSupport(layer, stage)
+                triangles.push(newSupport(layer, stage))
                 stage.add(layer);
             });
 
 document
             .getElementById('btnCreateArrow')
             .addEventListener('click', function () {
-                addPointCharge(layer)
+                arrows.push(addPointCharge(layer))
                 stage.add(layer);
             });
+
