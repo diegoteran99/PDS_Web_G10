@@ -56,6 +56,62 @@ tr.attachTo(e.target);
 layer.draw();
 })
 
+////////////////////////////// BASE.JS BASE ////////////////////////////////////////////
+var shadowRectangle = new Konva.Rect({
+  x: 0,
+  y: 0,
+  width: blockSnapSize * 6,
+  height: blockSnapSize * 3,
+  fill: '#FF7B17',
+  opacity: 0.6,
+  stroke: '#CF6412',
+  strokeWidth: 3,
+  dash: [20, 2]
+});
+
+function newRectangle(x, y, layer, stage) {
+  let rectangle = new Konva.Rect({
+    x: x,
+    y: y,
+    width: blockSnapSize * 6,
+    height: blockSnapSize * 3,
+    fill: '#fff',
+    stroke: '#ddd',
+    strokeWidth: 1,
+    shadowColor: 'black',
+    shadowBlur: 2,
+    shadowOffset: {x : 1, y : 1},
+    shadowOpacity: 0.4,
+    draggable: true
+  });
+  rectangle.on('dragstart', (e) => {
+    shadowRectangle.show();
+    shadowRectangle.moveToTop();
+    rectangle.moveToTop();
+  });
+  rectangle.on('dragend', (e) => {
+    rectangle.position({
+      x: Math.round(rectangle.x() / blockSnapSize) * blockSnapSize,
+      y: Math.round(rectangle.y() / blockSnapSize) * blockSnapSize
+    });
+    stage.batchDraw();
+    shadowRectangle.hide();
+  });
+  rectangle.on('dragmove', (e) => {
+    shadowRectangle.position({
+      x: Math.round(rectangle.x() / blockSnapSize) * blockSnapSize,
+      y: Math.round(rectangle.y() / blockSnapSize) * blockSnapSize
+    });
+    stage.batchDraw();
+  });
+  layer.add(rectangle);
+}
+
+// shadowRectangle.hide();
+// layer.add(shadowRectangle);
+// newRectangle(blockSnapSize * 3, blockSnapSize * 3, layer, stage);
+// newRectangle(blockSnapSize * 10, blockSnapSize * 3, layer, stage);
+
 
 
 ///////////////////////////////////// ROTATE LINE AND RESHAPE IT //////////////////77
