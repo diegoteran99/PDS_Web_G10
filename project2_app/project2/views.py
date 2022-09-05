@@ -8,4 +8,4 @@ def index(request):
 
 def all_tasks(request):
     # llamar a la db y obtener todas las tareas...
-    return render(request, 'all_tasks.hmtl')
+    return render(request, 'all_tasks.html')
