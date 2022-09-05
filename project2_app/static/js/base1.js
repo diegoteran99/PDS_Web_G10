@@ -6,11 +6,6 @@ var blockSnapSize = 30;
 var lineSize = 3;
 var triangleRadius = 10;
 
-let arrows = []
-let triangles = []
-let lines = []
-let nodes = []
-
 var stage = new Konva.Stage({
   container: 'container',
   width: width,
@@ -88,64 +83,15 @@ document
         stage.add(layer);
     });
 
-document
-    .getElementById('btnCreateSupport')
-    .addEventListener('click', function () {
-        const triangle =  new Konva.RegularPolygon({
-            x: 150,
-            y: 275,
-            sides: 3,
-            radius: triangleRadius,
-            scaleY: 1.6,
-            stroke: "black",
-            fill: "rgba(200,0,200, 1)",
-          });
-          layer.add(triangle);
-          
-          const anchor1 = new Konva.Circle({
-            x: line.points()[0],
-            y: line.points()[1],
-            radius: 3,
-            fill: 'blue',
-            draggable: true
-          })
-          layer.add(anchor1);
-          
-          const anchor2 = new Konva.Circle({
-            x: line.points()[2],
-            y: line.points()[3],
-            radius: 3,
-            fill: 'blue',
-            draggable: true
-          })
-          layer.add(anchor2);
-          
-          
-          function updateLine() {
-            const points = [
-              anchor1.x(),
-              anchor1.y(),
-              anchor2.x(),
-              anchor2.y(),
-            ]
-            line.points(points);
-            layer.batchDraw();
-          }
-          
-          anchor1.on('dragmove', updateLine);
-          anchor2.on('dragmove', updateLine);
-          
-          layer.draw();
-        stage.add(layer);
-    });
 
 document
     .getElementById('btnCreateArrow')
     .addEventListener('click', function () {
+
         const arrow = new Konva.Arrow({
             x: stage.width() / 40,
             y: stage.height() / 40,
-            points: [0, 0, width / 20, height / 20],
+            points: [5, 5, width / 20, height / 20],
             pointerLength: 5,
             pointerWidth: 5,
             fill: 'red',
@@ -153,6 +99,16 @@ document
             strokeWidth: 3,
           });
           layer.add(arrow);
+
+          var simpleText = new Konva.Text({
+            x: arrow.points()[2],
+            y: arrow.points()[3],
+            text: '1 kN', //que esto sea un input
+            fontSize: 15,
+            fontFamily: 'Calibri',
+            fill: 'red',
+          });
+          layer.add(simpleText);
           
           const anchor1 = new Konva.Circle({
             x: arrow.points()[0],
@@ -173,7 +129,7 @@ document
           layer.add(anchor2);
           
           
-          function updateArrow() {
+          function updateArrowAndText() {
             const points = [
               anchor1.x(),
               anchor1.y(),
@@ -181,12 +137,15 @@ document
               anchor2.y(),
             ]
             arrow.points(points);
+            simpleText.x(points[2]);
+            simpleText.y(points[3]);
             layer.batchDraw();
           }
           
-          anchor1.on('dragmove', updateArrow);
-          anchor2.on('dragmove', updateArrow);
+          anchor1.on('dragmove', updateArrowAndText);
+          anchor2.on('dragmove', updateArrowAndText);
           
           layer.draw();
+
         stage.add(layer);
     });
