@@ -187,3 +187,107 @@ document
 
         stage.add(layer);
     });
+
+    // document
+    // .getElementById('btnCreateCurvedArrow')
+    // .addEventListener('click', function () {
+
+    //     const curvedarrow = new Konva.Arrow({
+    //         x: stage.width() / 40,
+    //         y: stage.height() / 40,
+    //         points: [5, 5, width / 20, height / 20],
+    //         pointerLength: 5,
+    //         pointerWidth: 5,
+    //         fill: 'red',
+    //         stroke: 'red',
+    //         strokeWidth: 3,
+    //       });
+    //       layer.add(curvedarrow);
+
+    //       var simpleText = new Konva.Text({
+    //         x: curvedarrow.points()[2],
+    //         y: curvedarrow.points()[3],
+    //         text: '1 kN', //que esto sea un input
+    //         fontSize: 15,
+    //         fontFamily: 'Calibri',
+    //         fill: 'red',
+    //       });
+    //       layer.add(simpleText);
+          
+    //       simpleText.on('dblclick dbltap', () => {
+    //         // create textarea over canvas with absolute position
+    
+    //         // first we need to find position for textarea
+    //         // how to find it?
+    
+    //         // at first lets find position of text node relative to the stage:
+    //         var textPosition = simpleText.getAbsolutePosition();
+    
+    //         // then lets find position of stage container on the page:
+    //         var stageBox = stage.container().getBoundingClientRect();
+    
+    //         // so position of textarea will be the sum of positions above:
+    //         var areaPosition = {
+    //           x: stageBox.left + textPosition.x,
+    //           y: stageBox.top + textPosition.y,
+    //         };
+    
+    //         // create textarea and style it
+    //         var textarea = document.createElement('textarea');
+    //         document.body.appendChild(textarea);
+    
+    //         textarea.value = simpleText.text();
+    //         textarea.style.position = 'absolute';
+    //         textarea.style.top = areaPosition.y + 'px';
+    //         textarea.style.left = areaPosition.x + 'px';
+    //         textarea.style.width = simpleText.width();
+    
+    //         textarea.focus();
+    
+    //         textarea.addEventListener('keydown', function (e) {
+    //           // hide on enter
+    //           if (e.keyCode === 13) {
+    //             simpleText.text(textarea.value);
+    //             document.body.removeChild(textarea);
+    //           }
+    //         });
+    //       });
+    //       const anchor1 = new Konva.Circle({
+    //         x: curvedarrow.points()[0],
+    //         y: curvedarrow.points()[1],
+    //         radius: 3,
+    //         fill: 'blue',
+    //         draggable: true
+    //       })
+    //       layer.add(anchor1);
+          
+    //       const anchor2 = new Konva.Circle({
+    //         x: curvedarrow.points()[2],
+    //         y: curvedarrow.points()[3],
+    //         radius: 3,
+    //         fill: 'blue',
+    //         draggable: true
+    //       })
+    //       layer.add(anchor2);
+          
+          
+    //       function updateArrowAndText() {
+    //         const points = [
+    //           anchor1.x(),
+    //           anchor1.y(),
+    //           anchor2.x(),
+    //           anchor2.y(),
+    //         ]
+    //         curvedarrow.points(points);
+    //         simpleText.x(points[2]);
+    //         simpleText.y(points[3]);
+    //         layer.batchDraw();
+    //       }
+          
+    //       anchor1.on('dragmove', updateArrowAndText);
+    //       anchor2.on('dragmove', updateArrowAndText);
+          
+    //       layer.draw();
+
+    //     stage.add(layer);
+    // });
