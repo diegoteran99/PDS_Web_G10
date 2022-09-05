@@ -16,6 +16,14 @@
         </h1>
     </div>
     <div>
-        <h3> &nbsp No hay tareas</h3>
+        {% if tasks_list %}
+            <ul>
+            {% for task in tasks_list %}
+                <p>{{ task.description }}</p>
+            {% endfor %}
+            </ul>
+        {% else %}
+            <p>&nbsp No hay tareas</p>
+        {% endif %}
     </div>
 </div>
