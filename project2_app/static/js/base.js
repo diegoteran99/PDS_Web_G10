@@ -107,23 +107,22 @@ layer.add(tr);
 
 
 document
-            .getElementById('btnCreateLine')
-            .addEventListener('click', function () {
-                lines.push(newLine(layer))
-                stage.add(layer);
-            });
+    .getElementById('btnCreateLine')
+    .addEventListener('click', function () {
+        lines.push(newLine(layer))
+        stage.add(layer);
+    });
 
 document
-            .getElementById('btnCreateSupport')
-            .addEventListener('click', function () {
-                triangles.push(newSupport(layer, stage))
-                stage.add(layer);
-            });
+    .getElementById('btnCreateSupport')
+    .addEventListener('click', function () {
+        triangles.push(newSupport(layer, stage))
+        stage.add(layer);
+    });
 
 document
-            .getElementById('btnCreateArrow')
-            .addEventListener('click', function () {
-                arrows.push(addPointCharge(layer))
-                stage.add(layer);
-            });
-
+    .getElementById('btnCreateArrow')
+    .addEventListener('click', function () {
+        arrows.push(addPointCharge(layer))
+        stage.add(layer);
+    });

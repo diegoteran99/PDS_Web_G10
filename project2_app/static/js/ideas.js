@@ -153,3 +153,24 @@ const line = new Konva.Line({
   anchor1.on('dragmove', updateLine);
   anchor2.on('dragmove', updateLine);
   
+/////////////////////////////////PARA LISTA DE LINEAS///////////////////////////////////////////////////////////
+for (let i = 0; i < lines.length; i++){
+    const line = lines[i]; 
+    const anchor1 = new Konva.Circle({
+    x: line.points()[0],
+    y: line.points()[1],
+    radius: 10,
+    fill: 'red',
+    draggable: true
+})
+layer.add(anchor1);
+
+const anchor2 = new Konva.Circle({
+    x: line.points()[2],
+    y: line.points()[3],
+    radius: 10,
+    fill: 'red',
+    draggable: true
+})
+layer.add(anchor2);
+}
