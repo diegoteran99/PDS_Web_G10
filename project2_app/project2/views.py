@@ -28,9 +28,6 @@ class EditView(View):
         return HttpResponse()
 
 
-
-    
-
 def all_tasks(request):
     # llamar a la db y obtener todas las tareas...
     tasks_list = Task.objects.all()
