@@ -1,0 +1,13 @@
+{% load static %}
+
+<h2 class="card-title">Titulo de la Tarea</h2>
+<ul id="messages-abstract">
+</ul>
+<div class="mt-4">
+    <textarea class="form-control" id="title-text" name="text" placeholder="Escriba su resumen ejecutivo" rows="5">{{ project.titlew }}</textarea>
+    <span class="pull-right label label-default" id="abstract_count"></span>
+</div>
+
+{% block js_script %}
+    <script src="{% static 'js/new_task.js' %}"></script>
+{% endblock %}
