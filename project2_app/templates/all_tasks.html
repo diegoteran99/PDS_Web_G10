@@ -22,8 +22,8 @@
                     <td>Descripcion</td>
                     <th></th>
                 </tr>
+                {% for task in tasks_list %}
                 <tr>
-                    {% for task in tasks_list %}
                         <td>{{ task.description }}</td>
                         <td>
                             <a class="btn btn-primary"
@@ -31,9 +31,8 @@
                                Editar
                             </a>
                         </td>
-                    {% endfor %}
-
                 </tr>
+                {% endfor %}
             </table>
         {% else %}
             <p>&nbsp No hay tareas</p>
