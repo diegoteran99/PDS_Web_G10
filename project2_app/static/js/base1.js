@@ -32,6 +32,10 @@ for (var j = 0; j < height / padding; j++) {
   }));
 }
 
+function coord(number) {
+  return (Math.round(number/30))*30
+}
+  
 var layer = new Konva.Layer();
 
 stage.add(gridLayer);
@@ -41,24 +45,24 @@ document
     .getElementById('btnCreateLine')
     .addEventListener('click', function () {
         const line = new Konva.Line({
-            points: [50, 50, 250, 50],
-            stroke: 'black'
+            points: [30, 30, 150, 30],
+            stroke: 'black',
           });
           layer.add(line);
           
           const anchor1 = new Konva.Circle({
-            x: line.points()[0],
-            y: line.points()[1],
-            radius: 3,
+            x: coord(line.points()[0]),
+            y: coord(line.points()[1]),
+            radius: 4,
             fill: 'red',
             draggable: true
           })
           layer.add(anchor1);
           
           const anchor2 = new Konva.Circle({
-            x: line.points()[2],
-            y: line.points()[3],
-            radius: 3,
+            x: coord(line.points()[2]),
+            y: coord(line.points()[3]),
+            radius: 4,
             fill: 'red',
             draggable: true
           })
@@ -67,17 +71,24 @@ document
           
           function updateLine() {
             const points = [
-              anchor1.x(),
-              anchor1.y(),
-              anchor2.x(),
-              anchor2.y(),
+              coord(anchor1.x()),
+              coord(anchor1.y()),
+              coord(anchor2.x()),
+              coord(anchor2.y()),
             ]
             line.points(points);
+            anchor1.x(line.points()[0])
+            anchor1.y(line.points()[1])
+            anchor2.x(line.points()[2])
+            anchor2.y(line.points()[3])
             layer.batchDraw();
           }
           
           anchor1.on('dragmove', updateLine);
+          //anchor1.on('dragend', updateanchors1);
           anchor2.on('dragmove', updateLine);
+          //anchor2.on('dragend', updateanchors2);
+
           
           layer.draw();
         stage.add(layer);
