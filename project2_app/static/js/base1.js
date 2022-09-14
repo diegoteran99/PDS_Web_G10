@@ -82,14 +82,9 @@ document
             anchor2.x(line.points()[2])
             anchor2.y(line.points()[3])
             layer.batchDraw();
-          }
-          
+          }          
           anchor1.on('dragmove', updateLine);
-          //anchor1.on('dragend', updateanchors1);
           anchor2.on('dragmove', updateLine);
-          //anchor2.on('dragend', updateanchors2);
-
-          
           layer.draw();
         stage.add(layer);
     });
