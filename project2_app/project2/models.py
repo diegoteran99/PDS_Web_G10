@@ -1,6 +1,3 @@
-from signal import valid_signals
-from ssl import VerifyFlags
-from tkinter import CASCADE
 from django.db import models
 
 # Create your models here.
@@ -21,13 +18,13 @@ class Viga(models.Model):
     x0 = models.IntegerField()
     y0 = models.IntegerField()
     length = models.IntegerField()
-    angle = models.IntegerField()
+    angle = models.IntegerField(default=0)
 
 class Fuerza(models.Model):
     viga = models.ForeignKey(Viga, on_delete=models.CASCADE, blank=True, null=True, related_name="fuerzas")
     at_start = models.BooleanField()
     angle = models.IntegerField()
-    value = models.IntegerField()
+    value = models.IntegerField(default=90)
 
 class Momento(models.Model):
     viga = models.ForeignKey(Viga, on_delete=models.CASCADE, blank=True, null=True, related_name="momentos")
