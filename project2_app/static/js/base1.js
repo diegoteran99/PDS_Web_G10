@@ -6,11 +6,22 @@ var blockSnapSize = 30;
 var lineSize = 3;
 var triangleRadius = 10;
 
-var stage = new Konva.Stage({
-  container: 'container',
-  width: width,
-  height: height
-});
+// import {h} from "new_task.js"
+
+console.log(jsonkonva)
+
+
+if (jsonkonva){
+  var stage = new Konva.Stage({
+    container: 'container',
+    width: width,
+    height: height
+  });
+}
+else{
+  var stage = Konva.Node.create(jsonkonva, 'container');
+}
+
 
 var gridLayer = new Konva.Layer();
 var padding = blockSnapSize;
@@ -356,3 +367,4 @@ document
 
         stage.add(layer);
     });
+    jsonkonva = stage.toJSON();

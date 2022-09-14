@@ -1,3 +1,4 @@
+from queue import PriorityQueue
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.views import View
@@ -11,20 +12,28 @@ class EditView(View):
         diagram = task.diagram.get()
         context = {
             'task':task,
+            'dcl':task.dcl,
             'diagram':diagram,
             'vigas': diagram.vigas.all(),
             'fuerzas': Fuerza.objects.filter(viga__diagram=diagram).all(),
             'momentos': Momento.objects.filter(viga__diagram=diagram).all(),
             'apoyos': Apoyo.objects.filter(viga__diagram=diagram).all(),
         }
-        print(context)
+        #print(context)
         return render(request, 'edit_task.html', context)
 
     def post(self, request, task_id):
+        print(request.POST.get('ident'))
         task = Task.objects.get(id=task_id)
-        new_description = request.POST.get('description')
-        task.description = new_description
-        task.save()
+        if request.POST.get('ident') == 'description':
+            new_description = request.POST.get('description')
+            task.description = new_description
+            task.save()
+        elif request.POST.get('ident') == 'json':
+            dcl_update = request.POST.get('json_')
+            task.dcl = dcl_update
+            task.save()
+            
         return HttpResponse()
 
 

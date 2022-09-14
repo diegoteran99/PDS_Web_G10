@@ -39,6 +39,7 @@
     <button id="btnCreateArrow" class="btn-primary-blue">Agregar carga puntual </button>
     <!-- <button id="btnCreateCurvedArrow" class="btn-primary-blue">Agregar momento </button> -->
     <button id="btnCreatePoints" class="btn-primary-blue">Agregar texto </button>
+    <button id="btnSaveCanvas" class="btn-primary-blue" data-task_id='{{task.id}}'>Guardar </button>
   </div>
   <div id="container">
     <div class="konvajs-content" role="presentation" style="position: relative; width: 1280px; height: 1313px;">
@@ -49,6 +50,7 @@
 
 
   {% block js_script %}
+    <script> jsonkonva = "{{ task.dcl }}";</script>
     <script src="{% static '/js/base1.js' %}"></script>
     <script src="{% static 'js/edit_task.js' %}"></script>
   {% endblock %}
