@@ -64,8 +64,7 @@ document
           const anchor1 = new Konva.Circle({
             x: coord(line.points()[0]),
             y: coord(line.points()[1]),
-            radius: 4,
-            fill: 'red',
+            radius: 5,
             draggable: true
           })
           layer.add(anchor1);
@@ -73,8 +72,7 @@ document
           const anchor2 = new Konva.Circle({
             x: coord(line.points()[2]),
             y: coord(line.points()[3]),
-            radius: 4,
-            fill: 'red',
+            radius: 5,
             draggable: true
           })
           layer.add(anchor2);
@@ -93,9 +91,26 @@ document
             anchor2.x(line.points()[2])
             anchor2.y(line.points()[3])
             layer.batchDraw();
-          }          
+          } 
+          
+          function anchor1show() {
+            anchor1.fill('red')
+          }
+          function anchor2show() {
+            anchor2.fill('red')
+          }
+          function anchor1clean() {
+            anchor1.fill('')
+          }
+          function anchor2clean() {
+            anchor2.fill('')
+          }
           anchor1.on('dragmove', updateLine);
           anchor2.on('dragmove', updateLine);
+          anchor1.on('dragmove', anchor1show);
+          anchor2.on('dragmove', anchor2show);
+          anchor1.on('dragend', anchor1clean);
+          anchor2.on('dragend', anchor2clean);
           layer.draw();
         stage.add(layer);
     });
@@ -106,9 +121,7 @@ document
     .addEventListener('click', function () {
 
         const arrow = new Konva.Arrow({
-            x: stage.width() / 40,
-            y: stage.height() / 40,
-            points: [5, 5, width / 20, height / 20],
+            points: [30, 30, 150, 30],
             pointerLength: 5,
             pointerWidth: 5,
             fill: 'red',
@@ -166,19 +179,17 @@ document
             });
           });
           const anchor1 = new Konva.Circle({
-            x: arrow.points()[0],
-            y: arrow.points()[1],
-            radius: 3,
-            fill: 'blue',
+            x: coord(arrow.points()[0]),
+            y: coord(arrow.points()[1]),
+            radius: 5,
             draggable: true
           })
           layer.add(anchor1);
           
           const anchor2 = new Konva.Circle({
-            x: arrow.points()[2],
-            y: arrow.points()[3],
-            radius: 3,
-            fill: 'blue',
+            x: coord(arrow.points()[2]),
+            y: coord(arrow.points()[3]),
+            radius: 5,
             draggable: true
           })
           layer.add(anchor2);
@@ -186,22 +197,40 @@ document
           
           function updateArrowAndText() {
             const points = [
-              anchor1.x(),
-              anchor1.y(),
-              anchor2.x(),
-              anchor2.y(),
+              coord(anchor1.x()),
+              coord(anchor1.y()),
+              coord(anchor2.x()),
+              coord(anchor2.y()),
             ]
             arrow.points(points);
+            anchor1.x(arrow.points()[0]);
+            anchor1.y(arrow.points()[1]);
+            anchor2.x(arrow.points()[2]);
+            anchor2.y(arrow.points()[3]);
             simpleText.x(points[2]);
             simpleText.y(points[3]);
             layer.batchDraw();
           }
           
+          function anchor1show() {
+            anchor1.fill('blue')
+          }
+          function anchor2show() {
+            anchor2.fill('blue')
+          }
+          function anchor1clean() {
+            anchor1.fill('')
+          }
+          function anchor2clean() {
+            anchor2.fill('')
+          }
           anchor1.on('dragmove', updateArrowAndText);
           anchor2.on('dragmove', updateArrowAndText);
-          
+          anchor1.on('dragmove', anchor1show);
+          anchor2.on('dragmove', anchor2show);
+          anchor1.on('dragend', anchor1clean);
+          anchor2.on('dragend', anchor2clean);
           layer.draw();
-
         stage.add(layer);
     });
 
