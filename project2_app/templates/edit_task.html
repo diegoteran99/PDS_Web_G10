@@ -37,6 +37,19 @@
     <div style="margin-left: 1rem;">
         <textarea class="form-control" id="description-text" name="text" data-task_id='{{task.id}}' placeholder="Inserte enunciado de la tarea" rows="5">{{task.description}}</textarea>
     </div>
+    <div>
+      <form action="" method = "POST" enctype="multipart/form-data"> 
+        {% csrf_token %} 
+        {{ form.as_table }} 
+        <button type="submit">Upload</button> 
+    </form> 
+
+    </div>
+  <div>
+    {% if task.image %}
+    <img src="{{task.image.url}}">
+    {%endif%}
+  </div>
     <br>
     <div style="margin-bottom: 1rem; margin-left: 1rem;">
       <button id="btnCreateLine" class="btn-primary-blue">Agregar viga</button>
