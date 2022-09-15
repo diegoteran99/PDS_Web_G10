@@ -24,7 +24,7 @@ function saveDescription(){
 function saveJson(){
     let text_object = $("#btnSaveCanvas");
     let task_id = text_object.data("task_id");
-    console.log(jsonkonva)
+    //console.log(jsonkonva)
 
     $.ajax({
         url: `/tasks/${task_id}/`,
