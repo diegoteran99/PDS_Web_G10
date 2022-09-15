@@ -1,7 +1,8 @@
 from queue import PriorityQueue
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from django.views import View
+from django.views import View 
+from .forms import *
 
 from project2.models import Task, Diagram, Fuerza, Momento, Apoyo
 
@@ -51,3 +52,15 @@ def newTask(request):
     return redirect('edit_task', task_id=new_task.id)
     
     
+def task_view(request): 
+  
+    if request.method == 'POST': 
+        form = TaskForm(request.POST, request.FILES) 
+  
+        if form.is_valid(): 
+            form.save() 
+            return redirect('success') 
+    else: 
+        form = TaskForm() 
+    return render(request, 'edit_task.html', {'form' : form}) 
+  

@@ -6,6 +6,7 @@ class Task(models.Model):
     description = models.TextField(null=True, blank=True,default="")
     difficulty = models.IntegerField(null=True)
     dcl = models.JSONField(null=True)
+    image = models.ImageField(null=True, blank=True)
 
     def __str__(self):
         return self.description
