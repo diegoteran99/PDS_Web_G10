@@ -19,7 +19,7 @@
         Intelligent Tutoring System - Estatica
       </h1>
     </div>
-    <div class="d-flex justify-content-center">
+    <div class="d-flex justify-content-center" style="margin-left: 1rem;">
       <button class="btn btn-primary" type="button" onclick="location.href='{% url 'tasks'  %}'">
           Ir a Tareas
       </button>
@@ -29,8 +29,12 @@
       <p> &nbsp * Para editar el texto o el valor de la carga haga doble click sobre ella y para guardar
         el cambio presione Enter
       </p>
+      <p> &nbsp * Para borrar un elemento hacer dobleclick sobre el
+      </p>
+      <p> &nbsp * Para que se haga efectivo el cambio de algun valor se debe mover
+      </p>
     </div>
-    <div>
+    <div style="margin-left: 1rem;">
         <textarea class="form-control" id="description-text" name="text" data-task_id='{{task.id}}' placeholder="Inserte enunciado de la tarea" rows="5">{{task.description}}</textarea>
     </div>
     <br>
@@ -38,8 +42,8 @@
       <button id="btnCreateLine" class="btn-primary-blue">Agregar viga</button>
       <!-- <button id="btnCreateSupport" class="btn-primary-blue">Agregar apoyo </button> -->
       <button id="btnCreateArrow" class="btn-primary-blue">Agregar carga puntual </button>
-      <!-- <button id="btnCreateCurvedArrow" class="btn-primary-blue">Agregar momento </button> -->
-      <button id="btnCreatePoints" class="btn-primary-blue">Agregar texto </button>
+      <button id="btnCreateArrow2" class="btn-primary-blue">Agregar fuerza de carga </button>
+      <button id="btnCreatePoints" class="btn-primary-blue">Agregar punto </button>
       <button id="btnCreateCurvedArrow" class="btn-primary-blue">Agregar momento </button>
       <button id="btnSaveCanvas" class="btn-primary-blue" data-task_id='{{task.id}}'>Guardar </button>
     </div>

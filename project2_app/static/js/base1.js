@@ -6,20 +6,18 @@ var blockSnapSize = 30;
 var lineSize = 3;
 var triangleRadius = 10;
 
-// import {h} from "new_task.js"
 
 console.log(jsonkonva)
 
-if (!jsonkonva){
-  //var stage = Konva.Node.create(jsonkonva, 'container');
-  
-}
-else{
+if (jsonkonva){
   var stage = new Konva.Stage({
     container: 'container',
     width: width,
     height: height
-  });
+  });  
+}
+else{
+  var stage = Konva.Node.create(jsonkonva, 'container');
 }
 
 
@@ -57,7 +55,7 @@ document
     .addEventListener('click', function () {
         const line = new Konva.Line({
             points: [30, 30, 150, 30],
-            stroke: 'black',
+            stroke: 'grey',
             strokeWidth: 12,
           });
           layer.add(line);
@@ -65,7 +63,7 @@ document
           const anchor1 = new Konva.Circle({
             x: coord(line.points()[0]),
             y: coord(line.points()[1]),
-            radius: 5,
+            radius: 8,
             draggable: true
           })
           layer.add(anchor1);
@@ -73,7 +71,7 @@ document
           const anchor2 = new Konva.Circle({
             x: coord(line.points()[2]),
             y: coord(line.points()[3]),
-            radius: 5,
+            radius: 8,
             draggable: true
           })
           layer.add(anchor2);
@@ -129,11 +127,11 @@ document
 
         const arrow = new Konva.Arrow({
             points: [30, 30, 150, 30],
-            pointerLength: 10,
-            pointerWidth: 10,
+            pointerLength: 12,
+            pointerWidth: 12,
             fill: 'red',
             stroke: 'red',
-            strokeWidth: 3,
+            strokeWidth: 4,
           });
           layer.add(arrow);
           arrow.on('dblclick', function() {
@@ -143,32 +141,24 @@ document
           var simpleText = new Konva.Text({
             x: arrow.points()[2]-30,
             y: arrow.points()[3]-30,
-            text: '1 kN', //que esto sea un input
-            fontSize: 15,
+            text: '1 kN', 
+            fontSize: 20,
             fontFamily: 'Calibri',
             fill: 'red',
           });
           layer.add(simpleText);
           
           simpleText.on('dblclick dbltap', () => {
-            // create textarea over canvas with absolute position
-    
-            // first we need to find position for textarea
-            // how to find it?
-    
-            // at first lets find position of text node relative to the stage:
+          
             var textPosition = simpleText.getAbsolutePosition();
     
-            // then lets find position of stage container on the page:
             var stageBox = stage.container().getBoundingClientRect();
     
-            // so position of textarea will be the sum of positions above:
             var areaPosition = {
               x: stageBox.left + textPosition.x,
               y: stageBox.top + textPosition.y,
             };
     
-            // create textarea and style it
             var textarea = document.createElement('textarea');
             document.body.appendChild(textarea);
     
@@ -181,7 +171,6 @@ document
             textarea.focus();
     
             textarea.addEventListener('keydown', function (e) {
-              // hide on enter
               if (e.keyCode === 13) {
                 simpleText.text(textarea.value);
                 document.body.removeChild(textarea);
@@ -191,7 +180,7 @@ document
           const anchor1 = new Konva.Circle({
             x: coord(arrow.points()[0]),
             y: coord(arrow.points()[1]),
-            radius: 5,
+            radius: 7,
             draggable: true
           })
           layer.add(anchor1);
@@ -199,7 +188,7 @@ document
           const anchor2 = new Konva.Circle({
             x: coord(arrow.points()[2]),
             y: coord(arrow.points()[3]),
-            radius: 5,
+            radius: 7,
             draggable: true
           })
           layer.add(anchor2);
@@ -259,40 +248,35 @@ document
           pointerLength : 20,
           pointerWidth : 20,
           tension: 1,
-          strokeWidth: 3,
+          strokeWidth: 6,
           fill: 'red',
           });
           layer.add(arrow);
 
           var simpleText = new Konva.Text({
             x: arrow.points()[2],
-            y: arrow.points()[3],
-            text: '1 kN', //que esto sea un input
-            fontSize: 15,
+            y: arrow.points()[3]-30,
+            text: '1 kN', 
+            fontSize: 20,
             fontFamily: 'Calibri',
             fill: 'red',
           });
           layer.add(simpleText);
           
           simpleText.on('dblclick dbltap', () => {
-            // create textarea over canvas with absolute position
-    
-            // first we need to find position for textarea
-            // how to find it?
-    
-            // at first lets find position of text node relative to the stage:
+            
             var textPosition = simpleText.getAbsolutePosition();
     
-            // then lets find position of stage container on the page:
+            
             var stageBox = stage.container().getBoundingClientRect();
     
-            // so position of textarea will be the sum of positions above:
+            
             var areaPosition = {
               x: stageBox.left + textPosition.x,
               y: stageBox.top + textPosition.y,
             };
     
-            // create textarea and style it
+            
             var textarea = document.createElement('textarea');
             document.body.appendChild(textarea);
     
@@ -305,7 +289,7 @@ document
             textarea.focus();
     
             textarea.addEventListener('keydown', function (e) {
-              // hide on enter
+              
               if (e.keyCode === 13) {
                 simpleText.text(textarea.value);
                 document.body.removeChild(textarea);
@@ -315,7 +299,7 @@ document
           const anchor1 = new Konva.Circle({
             x: coord(arrow.points()[0]),
             y: coord(arrow.points()[1]),
-            radius: 5,
+            radius: 7,
             fill: 'blue',
             draggable: true
           })
@@ -324,7 +308,7 @@ document
           const anchor2 = new Konva.Circle({
             x: coord(arrow.points()[2]),
             y: coord(arrow.points()[3]),
-            radius: 5,
+            radius: 7,
             fill: 'blue',
             draggable: true
           })
@@ -333,7 +317,7 @@ document
           const anchor3 = new Konva.Circle({
             x: coord(arrow.points()[4]),
             y: coord(arrow.points()[5]),
-            radius: 5,
+            radius: 7,
             fill: 'blue',
             draggable: true
           })
@@ -357,7 +341,7 @@ document
             anchor3.x(arrow.points()[4]);
             anchor3.y(arrow.points()[5]);
             simpleText.x(points[2]);
-            simpleText.y(points[3]);
+            simpleText.y(points[3]-30);
             layer.batchDraw();
           }
           
@@ -406,43 +390,42 @@ document
         const circle = new Konva.Circle({
           x: 30,
           y: 30,
-          radius: 5,
+          radius: 10,
           fill: 'blue',
           draggable: true,
+        })
+        layer.add(circle);
+
+        const anchor1 = new Konva.Circle({
+          x: coord(circle.x()),
+          y: coord(circle.y()),
+          radius: 15,
+          draggable: true
         })
         layer.add(anchor1);
 
           var simpleText = new Konva.Text({
-            x: circle.x(),
-            y: circle.y(),
-            y: 25,
-            text: 'texto', //que esto sea un input
-            fontSize: 15,
+            x: circle.x()-8,
+            y: circle.y()-30,
+            text: 'A', 
+            fontSize: 25,
             fontFamily: 'Calibri',
-            fill: 'green',
-            draggable: true
+            fill: 'black'
           });
           layer.add(simpleText);
           
           simpleText.on('dblclick dbltap', () => {
-            // create textarea over canvas with absolute position
-    
-            // first we need to find position for textarea
-            // how to find it?
-    
-            // at first lets find position of text node relative to the stage:
+            
             var textPosition = simpleText.getAbsolutePosition();
     
-            // then lets find position of stage container on the page:
             var stageBox = stage.container().getBoundingClientRect();
     
-            // so position of textarea will be the sum of positions above:
             var areaPosition = {
               x: stageBox.left + textPosition.x,
               y: stageBox.top + textPosition.y,
             };
     
-            // create textarea and style it
+            
             var textarea = document.createElement('textarea');
             document.body.appendChild(textarea);
     
@@ -455,7 +438,7 @@ document
             textarea.focus();
     
             textarea.addEventListener('keydown', function (e) {
-              // hide on enter
+              
               if (e.keyCode === 13) {
                 simpleText.text(textarea.value);
                 document.body.removeChild(textarea);
@@ -463,13 +446,142 @@ document
             });
           });
           
+        function updateText() {
+            circle.x(coord(anchor1.x()))
+            circle.y(coord(anchor1.y()))
+            simpleText.x(circle.x()-8);
+            simpleText.y(circle.y()-30);
+            anchor1.x(circle.x());
+            anchor1.y(circle.y());
+            layer.batchDraw();
+        }
+        anchor1.on('dblclick', function() {
+          circle.remove();
+          simpleText.remove();
+          layer.draw()
+        });
+        circle.on('dragmove', updateText);
+        anchor1.on('dragmove', updateText);
 
         stage.add(layer);
+
     });
-document.getElementById('delete-button').addEventListener('click', () => {
-  const tr = layer.find('Transformer').toArray().find(tr => tr.nodes()[0] === currentShape);
-  tr.destroy();
-  currentShape.destroy();
-  layer.draw();
-});
+    document
+    .getElementById('btnCreateArrow2')
+    .addEventListener('click', function () {
+
+        const arrow = new Konva.Arrow({
+            points: [30, 30, 150, 30],
+            pointerLength: 12,
+            pointerWidth: 12,
+            fill: 'green',
+            stroke: 'green',
+            strokeWidth: 4,
+          });
+          layer.add(arrow);
+          arrow.on('dblclick', function() {
+            arrow.remove();
+            layer.draw()
+          })
+          var simpleText = new Konva.Text({
+            x: arrow.points()[2]-30,
+            y: arrow.points()[3]-30,
+            text: '1 kN', 
+            fontSize: 20,
+            fontFamily: 'Calibri',
+            fill: 'green',
+          });
+          layer.add(simpleText);
+          
+          simpleText.on('dblclick dbltap', () => {
+            
+            var textPosition = simpleText.getAbsolutePosition();
+    
+            var stageBox = stage.container().getBoundingClientRect();
+    
+            var areaPosition = {
+              x: stageBox.left + textPosition.x,
+              y: stageBox.top + textPosition.y,
+            };
+    
+            
+            var textarea = document.createElement('textarea');
+            document.body.appendChild(textarea);
+    
+            textarea.value = simpleText.text();
+            textarea.style.position = 'absolute';
+            textarea.style.top = areaPosition.y + 'px';
+            textarea.style.left = areaPosition.x + 'px';
+            textarea.style.width = simpleText.width();
+    
+            textarea.focus();
+    
+            textarea.addEventListener('keydown', function (e) {
+              
+              if (e.keyCode === 13) {
+                simpleText.text(textarea.value);
+                document.body.removeChild(textarea);
+              }
+            });
+          });
+          const anchor1 = new Konva.Circle({
+            x: coord(arrow.points()[0]),
+            y: coord(arrow.points()[1]),
+            radius: 7,
+            draggable: true
+          })
+          layer.add(anchor1);
+          
+          const anchor2 = new Konva.Circle({
+            x: coord(arrow.points()[2]),
+            y: coord(arrow.points()[3]),
+            radius: 7,
+            draggable: true
+          })
+          layer.add(anchor2);
+          
+          
+          function updateArrowAndText() {
+            const points = [
+              coord(anchor1.x()),
+              coord(anchor1.y()),
+              coord(anchor2.x()),
+              coord(anchor2.y()),
+            ]
+            arrow.points(points);
+            anchor1.x(arrow.points()[0]);
+            anchor1.y(arrow.points()[1]);
+            anchor2.x(arrow.points()[2]);
+            anchor2.y(arrow.points()[3]);
+            simpleText.x(points[2]-30);
+            simpleText.y(points[3]-30);
+            layer.batchDraw();
+          }
+          
+          function anchor1show() {
+            anchor1.fill('blue')
+          }
+          function anchor2show() {
+            anchor2.fill('blue')
+          }
+          function anchor1clean() {
+            anchor1.fill('')
+          }
+          function anchor2clean() {
+            anchor2.fill('')
+          }
+          anchor1.on('dragmove', updateArrowAndText);
+          anchor2.on('dragmove', updateArrowAndText);
+          anchor1.on('dragmove', anchor1show);
+          anchor2.on('dragmove', anchor2show);
+          anchor1.on('dragend', anchor1clean);
+          anchor2.on('dragend', anchor2clean);
+          layer.draw();
+        stage.add(layer);
+        arrow.on('dblclick', function() {
+          arrow.remove();
+          simpleText.remove();
+          layer.draw()
+        });
+    });
     jsonkonva = stage.toJSON();

@@ -15,7 +15,7 @@
         Intelligent Tutoring System - Estatica
         </h1>
     </div>
-    <div>
+    <div style="margin-left: 1rem;">
         {% if tasks_list %}
             <table>
                 <tr>
@@ -26,10 +26,13 @@
                 <tr>
                         <td>{{ task.description }}</td>
                         <td>
-                            <a class="btn btn-primary"
+                            <button>
+                                <a class="btn btn-primary"
                                href="{% url 'edit_task' task_id=task.id %}">
                                Editar
                             </a>
+                            </button>
+                            
                         </td>
                 </tr>
                 {% endfor %}
@@ -37,7 +40,7 @@
         {% else %}
             <p>&nbsp No hay tareas</p>
         {% endif %}
-        <div class="d-flex justify-content-center">
+        <div class="d-flex justify-content-center" style="margin-top: 1rem;">
             <button class="btn btn-primary" type="button" onclick="location.href='{% url 'new_task' %}'">
                 Crear Tarea
             </button>
