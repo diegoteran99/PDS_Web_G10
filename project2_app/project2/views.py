@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.views import View 
 from .forms import UserRegisterForm
+from .forms import TaskForm
 from django.contrib.auth.forms import  UserCreationForm
 from project2.models import Task, Diagram, Fuerza, Momento, Apoyo
 from django.contrib.auth.models import  User
@@ -28,6 +29,7 @@ class EditView(View):
     def post(self, request, task_id):
         print(request.POST.get('ident'))
         task = Task.objects.get(id=task_id)
+        
         if request.POST.get('ident') == 'description':
             new_description = request.POST.get('description')
             task.description = new_description
@@ -37,7 +39,7 @@ class EditView(View):
             task.dcl = dcl_update
             task.save()
             
-        return HttpResponse()
+        return render(request, 'edit_task.html')
 
 
 def all_tasks(request):
@@ -87,6 +89,13 @@ def register(request):
         form = UserRegisterForm()
     context = {'form' : form}  
     return render(request,'register.html', context)
+
+def delete(request, id_task):
+    task = Task.objects.get(pk=id_task)
+    task.delete()
+    tasks = Task.objects.all()
+    return render(request, 'all_tasks.html', {"tasks_list":tasks, "mensaje": "OK"})
+
 
 
   

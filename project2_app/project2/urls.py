@@ -12,6 +12,8 @@ urlpatterns = [
     path('tasks/<task_id>/', csrf_exempt( views.EditView.as_view()), name='edit_task'),
     path('task/new', views.newTask, name='new_task' ),
     path('register/', views.register, name='register'),
+    path('task_view/', views.task_view, name='task_view'),
+    path('delete/<int:id_task>', views.delete, name='delete' ),
     path('login/', LoginView.as_view(template_name='login.html'), name='login'),
     path('logout/', LogoutView.as_view(template_name='logout.html'), name='logout'),
 ]

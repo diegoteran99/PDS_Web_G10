@@ -1,0 +1,13 @@
+{% block content%}
+
+<div style="width:800px; margin:0 auto;">
+    <br>
+    <form class = "form" method="post">
+        {%csrf_token%}
+        {{ form.as_p}}    
+        <button type="submit" class="btn btn-primary" id="submit">Guardar</button>
+    </form>
+</div>
+
+
+{% endblock%}

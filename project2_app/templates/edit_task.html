@@ -37,12 +37,14 @@
     <div style="margin-left: 1rem;">
         <textarea class="form-control" id="description-text" name="text" data-task_id='{{task.id}}' placeholder="Inserte enunciado de la tarea" rows="5">{{task.description}}</textarea>
     </div>
-    <div>
-      <form action="" method = "POST" enctype="multipart/form-data"> 
-        {% csrf_token %} 
-        {{ form.as_table }} 
-        <button type="submit"style="margin-left: 1rem; margin-top: 1rem;">Upload</button> 
-    </form> 
+    <form>
+      <div class="form-group">
+        <label for="exampleFormControlFile1">Agregue una imagen:</label>
+        <input type="file" class="form-control-file" id="exampleFormControlFile1" name="image" data-task_id='{{task.id}}'>
+      </div>
+    </form>
+
+
 
     </div>
   <div>
@@ -67,7 +69,7 @@
       <button id="btnCreateArrow2" class="btn-primary-blue">Agregar fuerza de carga </button>
       <button id="btnCreatePoints" class="btn-primary-blue">Agregar punto </button>
       <button id="btnCreateCurvedArrow" class="btn-primary-blue">Agregar momento </button>
-      <button id="btnSaveCanvas" class="btn-primary-blue" data-task_id='{{task.id}}'>Guardar </button>
+      <button id="btnSaveCanvas" onclick="location.href='/all_tasks'" class="btn-primary-blue" data-task_id='{{task.id}}'>Guardar </button>
       
     </div>
     

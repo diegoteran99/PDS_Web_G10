@@ -7,7 +7,7 @@ class TaskForm(forms.ModelForm):
   
     class Meta: 
         model = Task 
-        fields = ['title', 'description', 'difficulty', 'dcl', 'image'] 
+        fields = ['title', 'description', 'dcl', 'image'] 
 
 
 class UserRegisterForm(UserCreationForm):
