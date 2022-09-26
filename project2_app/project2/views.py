@@ -2,9 +2,10 @@ from queue import PriorityQueue
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.views import View 
-from .forms import *
-
+from .forms import UserRegisterForm
+from django.contrib.auth.forms import  UserCreationForm
 from project2.models import Task, Diagram, Fuerza, Momento, Apoyo
+from django.contrib import messages
 
 # Create your views here.
 class EditView(View):
@@ -44,6 +45,9 @@ def all_tasks(request):
     context = {'tasks_list':tasks_list}
     return render(request, 'all_tasks.html', context)
 
+def inicio(request):
+    return render(request, 'inicio.html')
+
 def newTask(request):
     new_task = Task()
     new_task.save()
@@ -63,4 +67,18 @@ def task_view(request):
     else: 
         form = TaskForm() 
     return render(request, 'edit_task.html', {'form' : form}) 
+
+def register(request):
+    if request.method == 'POST': 
+        form = UserCreationForm(request.POST) 
+
+        if form.is_valid(): 
+            form.save()
+            return redirect('login')
+    else: 
+        form = UserRegisterForm()
+    context = {'form' : form}  
+    return render(request,'register.html', context)
+
+
   
