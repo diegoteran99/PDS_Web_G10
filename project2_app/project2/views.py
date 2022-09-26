@@ -5,6 +5,7 @@ from django.views import View
 from .forms import UserRegisterForm
 from django.contrib.auth.forms import  UserCreationForm
 from project2.models import Task, Diagram, Fuerza, Momento, Apoyo
+from django.contrib.auth.models import  User
 from django.contrib import messages
 
 # Create your views here.
@@ -45,8 +46,15 @@ def all_tasks(request):
     context = {'tasks_list':tasks_list}
     return render(request, 'all_tasks.html', context)
 
+def users(request):
+    users_list = User.objects.all()
+    context = {'users_list':users_list}
+    return render(request, 'users.html', context)
+
 def inicio(request):
     return render(request, 'inicio.html')
+
+
 
 def newTask(request):
     new_task = Task()
