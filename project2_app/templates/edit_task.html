@@ -41,30 +41,41 @@
       <form action="" method = "POST" enctype="multipart/form-data"> 
         {% csrf_token %} 
         {{ form.as_table }} 
-        <button type="submit">Upload</button> 
+        <button type="submit"style="margin-left: 1rem; margin-top: 1rem;">Upload</button> 
     </form> 
 
     </div>
   <div>
     {% if task.image %}
-    <img src="{{task.image.url}}">
+    <img src="{{task.image.url}}" style="height: 400; margin-left: 1rem; margin-bottom: 1rem; border: 1px solid black;">
     {%endif%}
   </div>
     <br>
     <div style="margin-bottom: 1rem; margin-left: 1rem;">
       <button id="btnCreateLine" class="btn-primary-blue">Agregar viga</button>
-      <button id="btnCreateSupport" class="btn-primary-blue">Agregar apoyo </button> 
+      <div style="display: inline-grid;">
+        <button id="btnCreatePinnedSupport" class="btn-primary-blue">Agregar apoyo estático</button> 
+        <button id="btnCreatePinnedSupport90" class="btn-primary-blue">→</button> 
+        <button id="btnCreatePinnedSupport-90" class="btn-primary-blue">←</button> 
+      </div>
+      <div style="display: inline-grid;">
+        <button id="btnCreateRollingSupport" class="btn-primary-blue">Agregar apoyo deslizante</button> 
+        <button id="btnCreateRollingSupport90" class="btn-primary-blue">→</button> 
+        <button id="btnCreateRollingSupport-90" class="btn-primary-blue">←</button> 
+      </div>
       <button id="btnCreateArrow" class="btn-primary-blue">Agregar carga puntual </button>
       <button id="btnCreateArrow2" class="btn-primary-blue">Agregar fuerza de carga </button>
       <button id="btnCreatePoints" class="btn-primary-blue">Agregar punto </button>
       <button id="btnCreateCurvedArrow" class="btn-primary-blue">Agregar momento </button>
       <button id="btnSaveCanvas" class="btn-primary-blue" data-task_id='{{task.id}}'>Guardar </button>
+      
     </div>
     
   </div>
+
   <div id="container">
     <div class="konvajs-content" role="presentation" style="position: relative; width: 1280px; height: 1313px;">
-      <canvas width="2560" height="2626" style="padding: 0px; margin: 0px; border: 0px; background-color: red; position: absolute; top: 0px; left: 0px; width: 1280px; height: 1313px; background-position: initial initial; background-repeat: initial initial;">
+      <canvas width="2560" height="2626" style="padding: 0px; margin: 0px; border: 0px; background-color: transparent; position: absolute; top: 0px; left: 0px; width: 1280px; height: 1313px; background-position: initial initial; background-repeat: initial initial;">
       </canvas>
     </div>
   </div>

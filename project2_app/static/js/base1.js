@@ -6,7 +6,6 @@ var blockSnapSize = 30;
 var lineSize = 3;
 var triangleRadius = 10;
 
-
 console.log(jsonkonva)
 
 if (jsonkonva){
@@ -58,7 +57,6 @@ document
             stroke: 'grey',
             strokeWidth: 12,
           });
-          layer.add(line);
           
           const anchor1 = new Konva.Circle({
             x: coord(line.points()[0]),
@@ -66,7 +64,6 @@ document
             radius: 8,
             draggable: true
           })
-          layer.add(anchor1);
           
           const anchor2 = new Konva.Circle({
             x: coord(line.points()[2]),
@@ -74,7 +71,8 @@ document
             radius: 8,
             draggable: true
           })
-          layer.add(anchor2);
+
+          layer.add(line, anchor1, anchor2);
           
           
           function updateLine() {
@@ -133,11 +131,21 @@ document
             stroke: 'red',
             strokeWidth: 4,
           });
-          layer.add(arrow);
-          arrow.on('dblclick', function() {
-            arrow.remove();
-            layer.draw()
+
+          const anchor1 = new Konva.Circle({
+            x: coord(arrow.points()[0]),
+            y: coord(arrow.points()[1]),
+            radius: 7,
+            draggable: true
           })
+          
+          const anchor2 = new Konva.Circle({
+            x: coord(arrow.points()[2]),
+            y: coord(arrow.points()[3]),
+            radius: 7,
+            draggable: true
+          })
+          
           var simpleText = new Konva.Text({
             x: arrow.points()[2]-30,
             y: arrow.points()[3]-30,
@@ -146,10 +154,11 @@ document
             fontFamily: 'Calibri',
             fill: 'red',
           });
-          layer.add(simpleText);
+          layer.add(arrow, anchor1, anchor2, simpleText);
           
+
           simpleText.on('dblclick dbltap', () => {
-          
+            
             var textPosition = simpleText.getAbsolutePosition();
     
             var stageBox = stage.container().getBoundingClientRect();
@@ -159,6 +168,7 @@ document
               y: stageBox.top + textPosition.y,
             };
     
+            
             var textarea = document.createElement('textarea');
             document.body.appendChild(textarea);
     
@@ -171,27 +181,14 @@ document
             textarea.focus();
     
             textarea.addEventListener('keydown', function (e) {
+              
               if (e.keyCode === 13) {
                 simpleText.text(textarea.value);
                 document.body.removeChild(textarea);
               }
             });
           });
-          const anchor1 = new Konva.Circle({
-            x: coord(arrow.points()[0]),
-            y: coord(arrow.points()[1]),
-            radius: 7,
-            draggable: true
-          })
-          layer.add(anchor1);
           
-          const anchor2 = new Konva.Circle({
-            x: coord(arrow.points()[2]),
-            y: coord(arrow.points()[3]),
-            radius: 7,
-            draggable: true
-          })
-          layer.add(anchor2);
           
           
           function updateArrowAndText() {
@@ -394,7 +391,6 @@ document
           fill: 'blue',
           draggable: true,
         })
-        layer.add(circle);
 
         const anchor1 = new Konva.Circle({
           x: coord(circle.x()),
@@ -402,7 +398,6 @@ document
           radius: 15,
           draggable: true
         })
-        layer.add(anchor1);
 
           var simpleText = new Konva.Text({
             x: circle.x()-8,
@@ -412,7 +407,7 @@ document
             fontFamily: 'Calibri',
             fill: 'black'
           });
-          layer.add(simpleText);
+        layer.add(circle, anchor1, simpleText);
           
           simpleText.on('dblclick dbltap', () => {
             
@@ -446,7 +441,7 @@ document
             });
           });
           
-        function updateText() {
+        function updateCircleAndText() {
             circle.x(coord(anchor1.x()))
             circle.y(coord(anchor1.y()))
             simpleText.x(circle.x()-8);
@@ -460,8 +455,8 @@ document
           simpleText.remove();
           layer.draw()
         });
-        circle.on('dragmove', updateText);
-        anchor1.on('dragmove', updateText);
+
+        anchor1.on('dragmove', updateCircleAndText);
 
         stage.add(layer);
 
@@ -478,11 +473,21 @@ document
             stroke: 'green',
             strokeWidth: 4,
           });
-          layer.add(arrow);
-          arrow.on('dblclick', function() {
-            arrow.remove();
-            layer.draw()
+         
+          const anchor1 = new Konva.Circle({
+            x: coord(arrow.points()[0]),
+            y: coord(arrow.points()[1]),
+            radius: 7,
+            draggable: true
           })
+          
+          const anchor2 = new Konva.Circle({
+            x: coord(arrow.points()[2]),
+            y: coord(arrow.points()[3]),
+            radius: 7,
+            draggable: true
+          })
+
           var simpleText = new Konva.Text({
             x: arrow.points()[2]-30,
             y: arrow.points()[3]-30,
@@ -491,7 +496,7 @@ document
             fontFamily: 'Calibri',
             fill: 'green',
           });
-          layer.add(simpleText);
+          layer.add(arrow, anchor1, anchor2, simpleText);
           
           simpleText.on('dblclick dbltap', () => {
             
@@ -524,21 +529,7 @@ document
               }
             });
           });
-          const anchor1 = new Konva.Circle({
-            x: coord(arrow.points()[0]),
-            y: coord(arrow.points()[1]),
-            radius: 7,
-            draggable: true
-          })
-          layer.add(anchor1);
           
-          const anchor2 = new Konva.Circle({
-            x: coord(arrow.points()[2]),
-            y: coord(arrow.points()[3]),
-            radius: 7,
-            draggable: true
-          })
-          layer.add(anchor2);
           
           
           function updateArrowAndText() {
@@ -584,119 +575,383 @@ document
           layer.draw()
         });
     });
+
     document
-    .getElementById('btnCreateSupport')
+    .getElementById('btnCreatePinnedSupport')
     .addEventListener('click', function () {
 
-        const triangle = new Konva.RegularPloygon({
+        const triangle = new Konva.RegularPolygon({
             x: 90,
-            y: 90,
-            fill: 'green',
-            stroke: 'green',
+            y: 83,
+            sides: 3,
+            fill: 'CornflowerBlue',
+            stroke: 'black',
             strokeWidth: 4,
-            draggable: true
+            draggable: true,
+            radius: 20
           });
-          layer.add(triangle);
           
-          var simpleText = new Konva.Text({
-            x: triangle.points()[0]-30,
-            y: triangle.points()[1]-30,
-            text: '1 kN', 
-            fontSize: 20,
-            fontFamily: 'Calibri',
-            fill: 'green',
+          const anchor1 = new Konva.RegularPolygon({
+            x: 90,
+            y: 83,
+            sides: 3,
+            fill: 'CornflowerBlue',
+            stroke: 'black',
+            strokeWidth: 4,
+            draggable: true,
+            radius: 20
           });
-          layer.add(simpleText);
-          
-          simpleText.on('dblclick dbltap', () => {
-            
-            var textPosition = simpleText.getAbsolutePosition();
-    
-            var stageBox = stage.container().getBoundingClientRect();
-    
-            var areaPosition = {
-              x: stageBox.left + textPosition.x,
-              y: stageBox.top + textPosition.y,
-            };
-    
-            
-            var textarea = document.createElement('textarea');
-            document.body.appendChild(textarea);
-    
-            textarea.value = simpleText.text();
-            textarea.style.position = 'absolute';
-            textarea.style.top = areaPosition.y + 'px';
-            textarea.style.left = areaPosition.x + 'px';
-            textarea.style.width = simpleText.width();
-    
-            textarea.focus();
-    
-            textarea.addEventListener('keydown', function (e) {
-              
-              if (e.keyCode === 13) {
-                simpleText.text(textarea.value);
-                document.body.removeChild(textarea);
-              }
-            });
-          });
-          const anchor1 = new Konva.Circle({
-            x: coord(triangle.points()[0]),
-            y: coord(triangle.points()[1]),
-            radius: 7,
-            draggable: true
-          })
-          layer.add(anchor1);
-          
-          const anchor2 = new Konva.Circle({
-            x: coord(triangle.points()[2]),
-            y: coord(triangle.points()[3]),
-            radius: 7,
-            draggable: true
-          })
-          layer.add(anchor2);
-          
-          
-          function updateArrowAndText() {
-            const points = [
-              coord(anchor1.x()),
-              coord(anchor1.y()),
-              coord(anchor2.x()),
-              coord(anchor2.y()),
-            ]
-            arrow.points(points);
-            anchor1.x(arrow.points()[0]);
-            anchor1.y(arrow.points()[1]);
-            anchor2.x(arrow.points()[2]);
-            anchor2.y(arrow.points()[3]);
-            simpleText.x(points[2]-30);
-            simpleText.y(points[3]-30);
+          layer.add(triangle, anchor1);  
+
+          function updatePinnedSupport() {
+            triangle.x(coord(anchor1.x()))
+            triangle.y(coord(anchor1.y())-7)
+            anchor1.x(triangle.x());
+            anchor1.y(triangle.y());          
             layer.batchDraw();
           }
+      
+          anchor1.on('dblclick', function() {
+            triangle.remove();
+            anchor1.remove();
+            layer.draw()
+          });
           
-          function anchor1show() {
-            anchor1.fill('blue')
-          }
-          function anchor2show() {
-            anchor2.fill('blue')
-          }
-          function anchor1clean() {
-            anchor1.fill('')
-          }
-          function anchor2clean() {
-            anchor2.fill('')
-          }
-          anchor1.on('dragmove', updateArrowAndText);
-          anchor2.on('dragmove', updateArrowAndText);
-          anchor1.on('dragmove', anchor1show);
-          anchor2.on('dragmove', anchor2show);
-          anchor1.on('dragend', anchor1clean);
-          anchor2.on('dragend', anchor2clean);
-          layer.draw();
         stage.add(layer);
-        triangle.on('dblclick', function() {
-          triangle.remove();
-          simpleText.remove();
-          layer.draw()
-        });
+        
+        anchor1.on('dragmove', updatePinnedSupport);
     });
+
+    document
+    .getElementById('btnCreatePinnedSupport90')
+    .addEventListener('click', function () {
+
+        const triangle = new Konva.RegularPolygon({
+            x: 66,
+            y: 90,
+            sides: 3,
+            fill: 'CornflowerBlue',
+            stroke: 'black',
+            strokeWidth: 4,
+            draggable: true,
+            radius: 20,
+            rotation: 90,
+          });
+          
+          const anchor1 = new Konva.RegularPolygon({
+            x: 66,
+            y: 90,
+            sides: 3,
+            fill: 'CornflowerBlue',
+            stroke: 'black',
+            strokeWidth: 4,
+            draggable: true,
+            radius: 20,
+            rotation: 90,
+          });
+          layer.add(triangle, anchor1);  
+
+          function updatePinnedSupport() {
+            triangle.x(coord(anchor1.x())-24)
+            triangle.y(coord(anchor1.y()))
+            anchor1.x(triangle.x());
+            anchor1.y(triangle.y());          
+            layer.batchDraw();
+          }
+      
+          anchor1.on('dblclick', function() {
+            triangle.remove();
+            anchor1.remove();
+            layer.draw()
+          });
+          
+        stage.add(layer);
+        
+        anchor1.on('dragmove', updatePinnedSupport);
+    });
+
+    document
+    .getElementById('btnCreatePinnedSupport-90')
+    .addEventListener('click', function () {
+
+        const triangle = new Konva.RegularPolygon({
+            x: 115,
+            y: 90,
+            sides: 3,
+            fill: 'CornflowerBlue',
+            stroke: 'black',
+            strokeWidth: 4,
+            draggable: true,
+            radius: 20,
+            rotation: 30,
+          });
+          
+          const anchor1 = new Konva.RegularPolygon({
+            x: 115,
+            y: 90,
+            sides: 3,
+            fill: 'CornflowerBlue',
+            stroke: 'black',
+            strokeWidth: 4,
+            draggable: true,
+            radius: 20,
+            rotation: 30,
+          });
+          layer.add(triangle, anchor1);  
+
+          function updatePinnedSupport() {
+            triangle.x(coord(anchor1.x())+25)
+            triangle.y(coord(anchor1.y()))
+            anchor1.x(triangle.x());
+            anchor1.y(triangle.y());          
+            layer.batchDraw();
+          }
+      
+          anchor1.on('dblclick', function() {
+            triangle.remove();
+            anchor1.remove();
+            layer.draw()
+          });
+          
+        stage.add(layer);
+        
+        anchor1.on('dragmove', updatePinnedSupport);
+    });
+
+
+    document
+    .getElementById('btnCreateRollingSupport')
+    .addEventListener('click', function () {
+
+        const triangle = new Konva.RegularPolygon({
+            x: 90,
+            y: 83,
+            sides: 3,
+            fill: 'coral',
+            stroke: 'black',
+            strokeWidth: 4,
+            draggable: true,
+            radius: 20
+          });
+          
+          const anchor1 = new Konva.RegularPolygon({
+            x: 90,
+            y: 83,
+            sides: 3,
+            fill: 'coral',
+            stroke: 'black',
+            strokeWidth: 4,
+            draggable: true,
+            radius: 20
+          });
+
+          const anchor2 = new Konva.Circle({
+            x: triangle.x() - 15,
+            y: triangle.y() + 19,
+            radius: 8,
+            fill: 'transparent',
+            stroke: 'black',
+          })
+
+          const anchor3 = new Konva.Circle({
+            x: triangle.x() + 15,
+            y: triangle.y() + 19,
+            radius: 8,
+            fill: 'transparent',
+            stroke: 'black',
+          })
+
+          const line = new Konva.Line({
+            points: [anchor2.x()-10, anchor2.y() + 10, anchor3.x() + 10, anchor3.y()+10],
+            stroke: 'black',
+            strokeWidth: 3,
+          });
+          layer.add(triangle, anchor1, anchor2, anchor3, line);
+
+          function updateRollingSupport() {
+            triangle.x(coord(anchor1.x()))
+            triangle.y(coord(anchor1.y())-7)
+            anchor1.x(triangle.x());
+            anchor1.y(triangle.y());
+            anchor2.x(anchor1.x() - 15);
+            anchor2.y(anchor1.y() + 19);
+            anchor3.x(anchor1.x() + 15);
+            anchor3.y(anchor1.y() + 19);
+            const points = [anchor2.x()-10, anchor2.y() + 10, anchor3.x() + 10, anchor3.y()+10]
+            line.points(points);            
+            layer.batchDraw();
+          }
+      
+          anchor1.on('dblclick', function() {
+            triangle.remove();
+            anchor1.remove();
+            anchor2.remove();
+            anchor3.remove();
+            line.remove();
+            layer.draw()
+          });
+          
+        stage.add(layer);
+        
+        anchor1.on('dragmove', updateRollingSupport);
+    });
+
+    document
+    .getElementById('btnCreateRollingSupport90')
+    .addEventListener('click', function () {
+
+        const triangle = new Konva.RegularPolygon({
+            x: 96,
+            y: 90,
+            sides: 3,
+            fill: 'coral',
+            stroke: 'black',
+            strokeWidth: 4,
+            draggable: true,
+            radius: 20,
+            rotation: 90,
+          });
+          
+          const anchor1 = new Konva.RegularPolygon({
+            x: 96,
+            y: 90,
+            sides: 3,
+            fill: 'coral',
+            stroke: 'black',
+            strokeWidth: 4,
+            draggable: true,
+            radius: 20,
+            rotation: 90,
+          });
+
+          const anchor2 = new Konva.Circle({
+            x: triangle.x() - 21,
+            y: triangle.y() - 15,
+            radius: 8,
+            fill: 'transparent',
+            stroke: 'black',
+          })
+
+          const anchor3 = new Konva.Circle({
+            x: triangle.x() - 21,
+            y: triangle.y() + 15,
+            radius: 8,
+            fill: 'transparent',
+            stroke: 'black',
+          })
+
+          const line = new Konva.Line({
+            points: [anchor2.x()-10, anchor2.y()-10 , anchor3.x() - 10, anchor3.y()+10],
+            stroke: 'black',
+            strokeWidth: 3,
+          });
+          layer.add(triangle, anchor1, anchor2, anchor3, line);
+
+          function updateRollingSupport() {
+            triangle.x(coord(anchor1.x())+6)
+            triangle.y(coord(anchor1.y()))
+            anchor1.x(triangle.x());
+            anchor1.y(triangle.y());
+            anchor2.x(anchor1.x() - 21);
+            anchor2.y(anchor1.y() - 15);
+            anchor3.x(anchor1.x() - 21);
+            anchor3.y(anchor1.y() + 15);
+            const points = [anchor2.x()-10, anchor2.y()-10 , anchor3.x() - 10, anchor3.y()+10]
+            line.points(points);            
+            layer.batchDraw();
+          }
+      
+          anchor1.on('dblclick', function() {
+            triangle.remove();
+            anchor1.remove();
+            anchor2.remove();
+            anchor3.remove();
+            line.remove();
+            layer.draw()
+          });
+          
+        stage.add(layer);
+        
+        anchor1.on('dragmove', updateRollingSupport);
+    });
+
+    document
+    .getElementById('btnCreateRollingSupport-90')
+    .addEventListener('click', function () {
+
+        const triangle = new Konva.RegularPolygon({
+            x: 115,
+            y: 90,
+            sides: 3,
+            fill: 'coral',
+            stroke: 'black',
+            strokeWidth: 4,
+            draggable: true,
+            radius: 20,
+            rotation: 30,
+          });
+          
+          const anchor1 = new Konva.RegularPolygon({
+            x: 115,
+            y: 90,
+            sides: 3,
+            fill: 'coral',
+            stroke: 'black',
+            strokeWidth: 4,
+            draggable: true,
+            radius: 20,
+            rotation: 30,
+          });
+
+          const anchor2 = new Konva.Circle({
+            x: triangle.x() + 21,
+            y: triangle.y() - 15,
+            radius: 8,
+            fill: 'transparent',
+            stroke: 'black',
+          })
+
+          const anchor3 = new Konva.Circle({
+            x: triangle.x() + 21,
+            y: triangle.y() + 15,
+            radius: 8,
+            fill: 'transparent',
+            stroke: 'black',
+          })
+
+          const line = new Konva.Line({
+            points: [anchor2.x()+10, anchor2.y()-10 , anchor3.x()+10, anchor3.y()+10],
+            stroke: 'black',
+            strokeWidth: 3,
+          });
+          layer.add(triangle, anchor1, anchor2, anchor3, line);
+
+          function updateRollingSupport() {
+            triangle.x(coord(anchor1.x())+25)
+            triangle.y(coord(anchor1.y()))
+            anchor1.x(triangle.x());
+            anchor1.y(triangle.y());
+            anchor2.x(anchor1.x() + 21);
+            anchor2.y(anchor1.y() - 15);
+            anchor3.x(anchor1.x() + 21);
+            anchor3.y(anchor1.y() + 15);
+            const points = [anchor2.x()+10, anchor2.y()-10 , anchor3.x()+10, anchor3.y()+10]
+            line.points(points);            
+            layer.batchDraw();
+          }
+      
+          anchor1.on('dblclick', function() {
+            triangle.remove();
+            anchor1.remove();
+            anchor2.remove();
+            anchor3.remove();
+            line.remove();
+            layer.draw()
+          });
+          
+        stage.add(layer);
+        
+        anchor1.on('dragmove', updateRollingSupport);
+    });
+
     jsonkonva = stage.toJSON();
