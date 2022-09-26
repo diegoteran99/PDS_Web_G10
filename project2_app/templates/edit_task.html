@@ -1,29 +1,64 @@
-<html><head>
-  <!-- USE DEVELOPMENT VERSION -->
-  <script src="https://cdn.rawgit.com/konvajs/konva/2.0.3/konva.min.js"></script>
+<html>
+  <head>
+        <!-- CSS only -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        {% load static %}
+        <title>Intelligent Tutoring System</title>
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+        <!-- Font Awesome icons (free version)-->
+        <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+        <!-- Google fonts-->
+        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
+        <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link rel="stylesheet" href="{% static 'css/base.css' %}"/>
+        <script src="https://cdn.rawgit.com/konvajs/konva/2.0.3/konva.min.js"></script>
   <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
-  <meta charset="utf-8">
-  {% load static %}
-  <link rel="stylesheet" href="{% static 'css/base.css' %}"/>
 
-  <title>Proyecto de Desarrollo de Sotfware - Proyecto 2</title>
-</head>
+    </head>
 
 <body>
   
   <div id="topbar">
-    <div>
-      <h1 style="text-decoration: underline;">
-        <img src="{% static '/images/logouandes.png' %}" width="168"
-        height="67">
-        Intelligent Tutoring System - Estatica
-      </h1>
-    </div>
-    <div class="d-flex justify-content-center" style="margin-left: 1rem;">
-      <button class="btn btn-primary" type="button" onclick="location.href='{% url 'tasks'  %}'">
-          Ir a Tareas
+ <!-- Navigation-->
+ <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
+  <div class="container">
+      <img src="{% static '/images/logouandes.png' %}" width="168"
+height="50">
+      <a class="navbar-brand" href="/">Intelligent Tutoring System</a>
+      <button class="navbar-toggler text-uppercase font-weight-bold bg-primary text-white rounded" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          Menu
+          <i class="fas fa-bars"></i>
       </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ms-auto">
+              <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="/">Cerrar sesion</a></li>
+              <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="/users">Lista usuarios</a></li>
+              <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="/all_tasks">Lista tareas</a></li>
+
+          </ul>
+      </div>
   </div>
+</nav>
+<!-- Masthead-->
+
+<header class="masthead bg-primary text-white text-center">
+  <div class="container d-flex align-items-center flex-column">
+      <!-- Masthead Avatar Image-->
+      <img class="masthead-avatar mb-5" src="assets/img/avataaars.svg" alt="..." />
+      <!-- Masthead Heading-->
+      <h1 class="masthead-heading text-uppercase mb-0">Crear Tarea
+      </h1>
+      <!-- Masthead Subheading-->
+      <p class="masthead-subheading font-weight-light mb-0">modelacion
+          de diagramas de cuerpo libre</p>
+  </div>
+</header>
     <div>
       <h3> &nbsp Dibuje un DCL</h3>
       <p> &nbsp * Para editar el texto o el valor de la carga haga doble click sobre ella y para guardar
@@ -32,6 +67,8 @@
       <p> &nbsp * Para borrar un elemento hacer dobleclick sobre el
       </p>
       <p> &nbsp * Para que se haga efectivo el cambio de algun valor se debe mover
+      </p>
+      <p> &nbsp Escriba el enunciado:
       </p>
     </div>
     <div style="margin-left: 1rem;">
@@ -43,6 +80,8 @@
         <input type="file" class="form-control-file" id="exampleFormControlFile1" name="image" data-task_id='{{task.id}}'>
       </div>
     </form>
+
+    
 
 
 
@@ -69,7 +108,7 @@
       <button id="btnCreateArrow2" class="btn-primary-blue">Agregar fuerza de carga </button>
       <button id="btnCreatePoints" class="btn-primary-blue">Agregar punto </button>
       <button id="btnCreateCurvedArrow" class="btn-primary-blue">Agregar momento </button>
-      <button id="btnSaveCanvas" onclick="location.href='/all_tasks'" class="btn-primary-blue" data-task_id='{{task.id}}'>Guardar </button>
+      <button id="btnSaveCanvas" onclick="location.href='/all_tasks'" class="btn btn-success" data-task_id='{{task.id}}'>Guardar </button>
       
     </div>
     
